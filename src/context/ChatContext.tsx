@@ -1,12 +1,14 @@
 
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { useAuth } from './AuthContext';
+import { toast } from 'sonner';
 
 interface Message {
   id: string;
   content: string;
   sender: 'user' | 'ai';
   timestamp: Date;
+  agentType?: 'intent_classifier' | 'loan_eligibility' | 'loan_application' | 'financial_literacy';
 }
 
 interface Conversation {
@@ -29,6 +31,9 @@ interface ChatContextType {
 }
 
 const ChatContext = createContext<ChatContextType | undefined>(undefined);
+
+// API settings
+const AGENT_API_URL = "http://localhost:5000/api/chat";
 
 export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { user, isAuthenticated } = useAuth();
@@ -114,24 +119,38 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({ children
     startNewConversation();
   }, [startNewConversation]);
 
-  // AI response generation (mock)
-  const generateAIResponse = async (message: string): Promise<string> => {
-    // Simulate AI thinking time
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    // Very basic loan-related responses for demo
-    if (message.toLowerCase().includes('loan')) {
-      return "I can help you with various loan options. Are you looking for a mortgage, personal loan, or business loan?";
-    } else if (message.toLowerCase().includes('mortgage')) {
-      return "For mortgages, I'd need to know your credit score, income, desired loan amount, and how much of a down payment you can make. Would you like to provide these details?";
-    } else if (message.toLowerCase().includes('interest')) {
-      return "Current interest rates vary based on your credit score, loan type, and market conditions. For the best rates, you'd want a credit score above 740, a stable income, and a low debt-to-income ratio.";
-    } else if (message.toLowerCase().includes('qualify')) {
-      return "Loan qualification depends on several factors: credit score, income stability, debt-to-income ratio, and loan purpose. Would you like me to walk you through a pre-qualification assessment?";
-    } else if (message.toLowerCase().includes('hello') || message.toLowerCase().includes('hi')) {
-      return "Hello! I'm your LoanBot advisor. How can I assist you today with your loan needs?";
-    } else {
-      return "I understand you're interested in loan options. Could you provide more specific information about what type of financing you're looking for?";
+  // Call the Python backend API
+  const callAgentAPI = async (message: string, conversationId: string): Promise<{ response: string, agentType: string }> => {
+    try {
+      const userId = user?.id || 'anonymous';
+      
+      const response = await fetch(AGENT_API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          user_id: userId,
+          conversation_id: conversationId,
+          message: message
+        })
+      });
+      
+      if (!response.ok) {
+        throw new Error(`API error: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      return {
+        response: data.response,
+        agentType: data.agent_type
+      };
+    } catch (error) {
+      console.error('Error calling agent API:', error);
+      return {
+        response: "I'm sorry, I'm having trouble connecting to my knowledge base right now. Please try again later.",
+        agentType: "intent_classifier"
+      };
     }
   };
 
@@ -175,8 +194,8 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({ children
         prev.map(conv => conv.id === conversationToUpdate.id ? conversationToUpdate : conv)
       );
       
-      // Generate AI response
-      const aiResponse = await generateAIResponse(content);
+      // Call the agent API
+      const { response: aiResponse, agentType } = await callAgentAPI(content, conversationToUpdate.id);
       
       // Create AI message
       const aiMessage: Message = {
@@ -184,6 +203,7 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({ children
         content: aiResponse,
         sender: 'ai',
         timestamp: new Date(),
+        agentType: agentType as any,
       };
       
       // Update conversation with AI message
@@ -202,6 +222,7 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({ children
       
     } catch (error) {
       console.error('Error sending message:', error);
+      toast.error('Failed to get a response. Please try again later.');
     } finally {
       setIsProcessing(false);
     }
