@@ -14,38 +14,43 @@ const VoiceButton: React.FC<VoiceButtonProps> = ({ onResult, disabled = false })
   const recognitionRef = useRef<SpeechRecognition | null>(null);
 
   useEffect(() => {
-    if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      recognitionRef.current = new SpeechRecognition();
-      recognitionRef.current.continuous = false;
-      recognitionRef.current.interimResults = true;
-      recognitionRef.current.lang = 'en-US';
+    // Check if browser supports Speech Recognition
+    const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
+    
+    if (SpeechRecognitionAPI) {
+      recognitionRef.current = new SpeechRecognitionAPI();
+      
+      if (recognitionRef.current) {
+        recognitionRef.current.continuous = false;
+        recognitionRef.current.interimResults = true;
+        recognitionRef.current.lang = 'en-US';
 
-      recognitionRef.current.onresult = (event) => {
-        const transcript = Array.from(event.results)
-          .map(result => result[0].transcript)
-          .join('');
-        
-        if (event.results[0].isFinal) {
-          setIsProcessing(true);
-          setTimeout(() => {
-            onResult(transcript);
-            stopListening();
-            setIsProcessing(false);
-          }, 500);
-        }
-      };
+        recognitionRef.current.onresult = (event) => {
+          const transcript = Array.from(event.results)
+            .map(result => result[0].transcript)
+            .join('');
+          
+          if (event.results[0].isFinal) {
+            setIsProcessing(true);
+            setTimeout(() => {
+              onResult(transcript);
+              stopListening();
+              setIsProcessing(false);
+            }, 500);
+          }
+        };
 
-      recognitionRef.current.onerror = (event) => {
-        console.error('Speech recognition error', event.error);
-        stopListening();
-      };
+        recognitionRef.current.onerror = (event) => {
+          console.error('Speech recognition error', event);
+          stopListening();
+        };
 
-      recognitionRef.current.onend = () => {
-        if (isListening) {
-          setIsListening(false);
-        }
-      };
+        recognitionRef.current.onend = () => {
+          if (isListening) {
+            setIsListening(false);
+          }
+        };
+      }
     }
 
     return () => {
