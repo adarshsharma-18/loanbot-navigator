@@ -64,6 +64,7 @@ const ChatInterface: React.FC = () => {
                 content={msg.content}
                 sender={msg.sender}
                 timestamp={msg.timestamp}
+                agent={msg.agent}
               />
             ))
           ) : (
