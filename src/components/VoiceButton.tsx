@@ -104,7 +104,7 @@ const VoiceButton: React.FC<VoiceButtonProps> = ({ onResult, disabled = false })
       {isProcessing ? (
         <Loader2 className="w-6 h-6 animate-spin" />
       ) : isListening ? (
-        <Mic className="w-6 h-6 text-red-500" />
+        <Mic className="w-6 h-6" />
       ) : (
         <Mic className="w-6 h-6" />
       )}
