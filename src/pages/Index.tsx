@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, BarChart, Lock, MessageSquare, Sparkles } from 'lucide-react';
+import { ArrowRight, BarChart, Lock, MessageSquare, Sparkles, IndianRupee } from 'lucide-react';
 import Navbar from '../components/Navbar';
 
 const Index = () => {
@@ -53,7 +52,7 @@ const Index = () => {
                     I need help choosing between a fixed and variable rate mortgage.
                   </div>
                   <div className="message-bubble-ai animate-slide-up" style={{ animationDelay: '0.6s' }}>
-                    Based on your profile and current market conditions, a fixed-rate mortgage at 4.2% would save you $12,500 over the next 5 years compared to the variable option.
+                    Based on your profile and current market conditions, a fixed-rate mortgage at 4.2% would save you ₹10,42,500 over the next 5 years compared to the variable option.
                   </div>
                   <div className="message-bubble-user animate-slide-up" style={{ animationDelay: '0.8s' }}>
                     Can you show me how the payments would look?
@@ -63,12 +62,12 @@ const Index = () => {
                     <div className="flex space-x-4 text-sm">
                       <div className="flex-1 p-2 bg-muted rounded-md">
                         <div className="font-medium mb-1">Fixed Rate</div>
-                        <div className="text-loan font-bold mb-1">$1,870/mo</div>
+                        <div className="text-loan font-bold mb-1">₹1,55,833/mo</div>
                         <div className="text-xs text-muted-foreground">Stability for 5 years</div>
                       </div>
                       <div className="flex-1 p-2 bg-muted rounded-md">
                         <div className="font-medium mb-1">Variable Rate</div>
-                        <div className="font-bold mb-1">$1,720/mo</div>
+                        <div className="font-bold mb-1">₹1,43,333/mo</div>
                         <div className="text-xs text-muted-foreground">May increase over time</div>
                       </div>
                     </div>

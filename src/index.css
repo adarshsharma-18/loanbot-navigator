@@ -5,39 +5,39 @@
 
 @layer base {
   :root {
-    --background: 0 0% 99%;
-    --foreground: 0 0% 10%;
+    --background: 14 25% 92%;
+    --foreground: 223 64% 24%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 10%;
+    --card: 14 25% 92%;
+    --card-foreground: 223 64% 24%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 10%;
+    --popover: 14 25% 92%;
+    --popover-foreground: 223 64% 24%;
 
-    --primary: 210 40% 96.1%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 223 64% 24%;
+    --primary-foreground: 14 25% 92%;
 
-    --secondary: 210 20% 96%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 350 47% 45%;
+    --secondary-foreground: 14 25% 92%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 285 3% 71%;
+    --muted-foreground: 223 64% 24%;
 
-    --accent: 210 30% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 350 47% 45%;
+    --accent-foreground: 14 25% 92%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 350 47% 45%;
+    --destructive-foreground: 14 25% 92%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 285 3% 71%;
+    --input: 285 3% 71%;
+    --ring: 223 64% 24%;
 
     --radius: 1rem;
 
-    --loan-light: 210 100% 97%;
-    --loan: 210 100% 50%;
-    --loan-dark: 210 100% 30%;
+    --loan-light: 14 25% 92%;
+    --loan: 223 64% 24%;
+    --loan-dark: 350 47% 45%;
   }
 
   * {
