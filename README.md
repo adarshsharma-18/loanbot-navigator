@@ -1,69 +1,118 @@
-# Welcome to your Lovable project
+# Loan Bot Navigator
 
-## Project info
+A modern web application that helps users navigate through loan options, calculate EMIs, compare different loans, and manage loan applications with an interactive chat interface.
 
-**URL**: https://lovable.dev/projects/21a87ac0-108d-4468-9111-e10a8da011b0
+## Features
 
-## How can I edit this code?
+- Interactive chat interface for loan-related queries
+- EMI calculator
+- Loan comparison tools
+- Voice interaction capabilities
+- Loan application management
+- User authentication system
+- Dashboard with loan insights
 
-There are several ways of editing your application.
+## Technology Stack
 
-**Use Lovable**
+This project is built with modern web technologies:
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/21a87ac0-108d-4468-9111-e10a8da011b0) and start prompting.
+- **Frontend Framework**: React with TypeScript
+- **Build Tool**: Vite
+- **UI Components**: shadcn-ui
+- **Styling**: Tailwind CSS
+- **State Management**: React Context
+- **Voice Integration**: Custom voice interface
 
-Changes made via Lovable will be committed automatically to this repo.
+## Getting Started
 
-**Use your preferred IDE**
+### Prerequisites
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+- Node.js & npm - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- Python 3.x for the backend server
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Installation
 
-Follow these steps:
+1. Clone the Repository:
+```sh
+# Clone the repository
+git clone https://github.com/adarshsharma-18/loanbot-navigator
+
+# Navigate to the project directory
+cd loanbot-navigator
+```
+
+2. Start the Backend Server:
+```sh
+# Navigate to the api directory
+cd api
+
+# Install Python dependencies
+pip install -r requirements.txt
+
+# Start the backend server
+python app.py
+```
+
+3. Start the Frontend Application:
+
+> **Important**: Ensure the backend server is running before starting the frontend application.
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+# In a new terminal, navigate to the project root
+cd loanbot-navigator
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# Install dependencies
+npm install
 
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start the development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+## Project Structure
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+- `/src` - Main source code directory
+  - `/components` - React components including chat interface and voice controls
+  - `/context` - React context providers for auth and chat state
+  - `/pages` - Application pages and routes
+  - `/services` - API services and business logic
+  - `/types` - TypeScript type definitions
 
-**Use GitHub Codespaces**
+## Development
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+You can work on this project in several ways:
 
-## What technologies are used for this project?
+### Local Development
 
-This project is built with .
+1. Clone the repository
+2. Install dependencies with `npm install`
+3. Start the development server with `npm run dev`
+4. Make your changes
+5. Commit and push your changes
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+### GitHub Integration
 
-## How can I deploy this project?
+- Edit files directly through GitHub's web interface
+- Use GitHub Codespaces for a cloud development environment
 
-Simply open [Lovable](https://lovable.dev/projects/21a87ac0-108d-4468-9111-e10a8da011b0) and click on Share -> Publish.
+## Deployment
 
-## I want to use a custom domain - is that possible?
+The application can be deployed to various platforms that support static site hosting:
 
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+1. Build the project:
+```sh
+npm run build
+```
+
+2. Deploy the contents of the `dist` directory to your preferred hosting platform
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details
